@@ -1,0 +1,17 @@
+{
+    "name": "parkew/banco",
+    "description": "Projeto de um banco usando PHP",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Parkew\\Banco\\": "scr/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Eduardo220",
+            "email": "eduardo.weissheimer22@gmail.com"
+        }
+    ],
+    "require": {}
+}
