@@ -2,9 +2,9 @@
 require __DIR__ . '/../vendor/autoload.php'; // Incluindo o autoload do Composer, se necessário
 
 
-use Eduar\OrientacaoObjetos\ContasTipo\ContaPoupanca; // Importando a classe ContaBancaria do namespace Banco
-use Eduar\OrientacaoObjetos\Contratos\DadosContaBancariaInterface; // Importando a interface DadosContaBancariaInterface do namespace Banco\Contratos
-use Eduar\OrientacaoObjetos\Contratos\OperacoesContaBancariaInterface; // Importando a interface OperacoesContaBancariaInterface do namespace Banco\Contratos
+use Parkew\Banco\ContasTipo\ContaPoupanca; // Importando a classe ContaBancaria do namespace Banco
+use Parkew\Banco\Contratos\OperacoesContaBancariaInterface; // Importando a interface DadosContaBancariaInterface do namespace Banco\Contratos
+use Parkew\Banco\Contratos\DadosContaBancariaInterface; // Importando a interface OperacoesContaBancariaInterface do namespace Banco\Contratos
 
 function executarOperacoes(OperacoesContaBancariaInterface $contaBancaria): void
 {

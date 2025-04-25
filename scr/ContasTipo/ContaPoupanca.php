@@ -1,7 +1,7 @@
 <?php 
 declare(strict_types=1); // Habilitando o modo estrito para garantir que os tipos sejam respeitados
 
-namespace Eduar\OrientacaoObjetos\ContasTipo; // Definindo o namespace Banco\ContasTipo
+namespace Parkew\Banco\ContasTipo; // Definindo o namespace Banco\ContasTipo
 
 use Parkew\Banco\ContaBancaria; // Importando a classe ContaBancaria do namespace Banco
 
