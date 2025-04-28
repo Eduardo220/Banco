@@ -1,5 +1,6 @@
 <?php
-require 'Usuario.php';
+require_once __DIR__ . '/../Model/Usuario.php';
+session_start();
 
 $usuario = new Usuario();
 

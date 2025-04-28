@@ -1,5 +1,5 @@
 <?php
-require 'Usuario.php';
+require_once __DIR__ . '/../Model/Usuario.php';
 
 $usuario = new Usuario();
 
@@ -23,9 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Aqui você poderia também validar o formato do e-mail, a data de nascimento, etc.
-
-    // Registrar usuário (por enquanto só usando nome e senha, porque sua classe atual não grava e-mail, gênero e nascimento)
     echo $usuario->register($name, $password);
 }
 
