@@ -1,59 +1,52 @@
 <?php 
 
-require 'Produto.php'; // Inclui a classe Produto
+require 'Usuario.php'; // Inclui a classe Usuario (novo nome)
 
-$produto = new Produto(); // Cria uma nova instância da classe Produto
+$usuario = new Usuario(); // Cria uma nova instância da classe Usuario
 
-switch ($_GET['operacao']) 
-{	
-    case 'list':
-        echo "<h1>Lista de Produtos</h1>"; // Exibe o título da página
+// Verifica se o parâmetro 'operacao' foi enviado
+$operacao = $_GET['operacao'] ?? null;
 
-        $produtos = $produto->list(); // Chama o método list() da classe Produto
-        if (empty($produtos)) {
-            echo "Nenhum produto encontrado."; // Exibe mensagem se não houver produtos
-        } else {
-            foreach ($produtos as $value) { // Percorre cada produto retornado pela consulta
-                echo 'Id: ' . $value['id'] . '<br> Nome: ' . $value['name'] . '<hr>'; // Exibe o ID e o nome do produto
-            }
-        }
-        break; // Encerra o caso 'list'
+if (!$operacao) {
+    echo "Nenhuma operação selecionada.";
+    exit;
+}
 
-    case 'insert':
-        $status = $produto->insert($_GET['name']); // Chama o método insert() com o nome enviado via GET
-        
-        if ($status) {
-            echo "Produto inserido com sucesso!"; // Mensagem de sucesso
-        } else {
-            echo "Erro ao inserir o produto."; // Mensagem de erro se a inserção falhar
+switch ($operacao) 
+{
+    case 'register':
+        if (!isset($_GET['name']) || !isset($_GET['password'])) {
+            echo "Nome e senha são obrigatórios para registro.";
+            exit;
         }
-        echo "<br><a href='list.php'>Voltar</a>"; // Link para voltar à lista de produtos
-        break; // Encerra o caso 'insert'
-    
-    case 'update':
-        $status = $produto->update($_GET['id'], $_GET['name']); // Chama o método update() com o ID e o nome enviados via GET
-        
-        if ($status) {
-            echo "Produto atualizado com sucesso!"; // Mensagem de sucesso
-        } else {
-            echo "Erro ao atualizar o produto."; // Mensagem de erro se a atualização falhar
+
+        $name = $_GET['name'];
+        $password = $_GET['password'];
+
+        $status = $usuario->register($name, $password);
+
+        echo $status;
+        echo "<br><a href='?operacao=list'>Ver usuários</a>";
+        break;
+
+    case 'login':
+        if (!isset($_GET['name']) || !isset($_GET['password'])) {
+            echo "Nome e senha são obrigatórios para login.";
+            exit;
         }
-        echo "<br><a href='list.php'>Voltar</a>"; // Link para voltar à lista de produtos
-        break; // Encerra o caso 'update'
-        
-    case 'delete':
-        $status = $produto->delete($_GET['id']); // Chama o método delete() com o ID enviado via GET
-        
-        if ($status) {
-            echo "Produto deletado com sucesso!"; // Mensagem de sucesso
+
+        $name = $_GET['name'];
+        $password = $_GET['password'];
+
+        if ($usuario->login($name, $password)) {
+            echo "Login realizado com sucesso!";
         } else {
-            echo "Erro ao deletar o produto."; // Mensagem de erro se a deleção falhar
+            echo "Nome de usuário ou senha incorretos.";
         }
-        echo "<br><a href='list.php'>Voltar</a>"; // Link para voltar à lista de produtos
-        break; // Encerra o caso 'delete'
-        
+        break;
+
     default:
-        echo "Ação inválida."; // Mensagem de erro para ação inválida
+        echo "Ação inválida.";
 }
 
 ?>

@@ -1,11 +1,25 @@
 <?php
+require 'Usuario.php';
 
-function validarEmail(string $email): bool {
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return true;
+$usuario = new Usuario();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    if (empty($username) || empty($password)) {
+        echo "Preencha todos os campos.";
+        exit;
+    }
+
+    if ($usuario->login($username, $password)) {
+        session_start();
+        $_SESSION['user'] = $username;
+        echo "Login realizado com sucesso!";
+        header('Location: painel.php'); // Redirecionar para uma página protegida
+        exit;
     } else {
-        throw new InvalidArgumentException("E-mail inválido.");
+        echo "Usuário ou senha inválidos.";
     }
 }
-
-
+?>
