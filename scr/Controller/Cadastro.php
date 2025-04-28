@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    echo $usuario->register($name, $password);
+    echo $usuario->register($name, $email, $gender, $birth_date, $password);
 }
 
 ?>

@@ -35,20 +35,33 @@ class Usuario
         return false; // Senha ou usuário incorretos
     }
 
-    // Função para registrar um novo usuário
-    public function register(string $name, string $password): string
-    {
-        // Hash da senha para segurança
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $sql = 'INSERT INTO usuario (name, password) VALUES (?, ?)'; // SQL para inserir um novo usuário
-
-        $prepare = $this->conexao->prepare($sql); // Prepara a consulta
-        $prepare->bindParam(1, $name); // Associa o nome do usuário
-        $prepare->bindParam(2, $hashedPassword); // Associa a senha hash
-
-        $prepare->execute(); // Executa a consulta
-
-        return "Usuário registrado com sucesso!";
+    public function register(string $name, string $email, string $gender, string $birth_date, string $password): string
+{
+    // Verificar se o email já existe
+    $sql = 'SELECT * FROM usuario WHERE email = ?';
+    $prepare = $this->conexao->prepare($sql);
+    $prepare->bindParam(1, $email);
+    $prepare->execute();
+    if ($prepare->fetch()) {
+        return "E-mail já cadastrado.";
     }
+
+    // Hash da senha para segurança
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $sql = 'INSERT INTO usuario (name, email, gender, birth_date, password) 
+            VALUES (?, ?, ?, ?, ?)';
+
+    $prepare = $this->conexao->prepare($sql);
+    $prepare->bindParam(1, $name);
+    $prepare->bindParam(2, $email);
+    $prepare->bindParam(3, $gender);
+    $prepare->bindParam(4, $birth_date);
+    $prepare->bindParam(5, $hashedPassword);
+
+    $prepare->execute();
+
+    return "Usuário registrado com sucesso!";
+}
+
 }

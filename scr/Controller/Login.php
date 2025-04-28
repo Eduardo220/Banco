@@ -15,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($usuario->login($username, $password)) {
         session_start();
-        $_SESSION['user'] = $username;
-        echo "Login realizado com sucesso!";
+        $_SESSION['user'] = $username; // Armazenar o nome de usuário na sessão
+        echo "Login realizado com sucesso!"; 
         header('Location: painel.php'); // Redirecionar para uma página protegida
         exit;
     } else {

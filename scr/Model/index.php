@@ -23,7 +23,7 @@ switch ($operacao)
         $name = $_GET['name'];
         $password = $_GET['password'];
 
-        $status = $usuario->register($name, $password);
+        $status = $usuario->register($name, $email, $gender, $birth_date, $password);
 
         echo $status;
         echo "<br><a href='?operacao=list'>Ver usuários</a>";
