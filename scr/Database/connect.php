@@ -8,7 +8,6 @@ try {
     // Cria uma nova conexão PDO com o banco de dados MySQL
     $pdo = new PDO('mysql:host=localhost;dbname=banco', 'root', ''); // Substitua os valores conforme necessário
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Define o modo de erro para exceções
-    echo "Conexão com o banco de dados estabelecida com sucesso!"; // Mensagem de sucesso
 } catch (Exception $e) {
     // Captura qualquer outra exceção e exibe uma mensagem de erro
     echo "Erro inesperado: " . $e->getMessage(); // Exibe a mensagem de erro
