@@ -1,7 +1,7 @@
 # Sistema de Conta Bancária — PHP + MySQL
 
 ### 📋 Descrição
-Aplicação backend desenvolvida em PHP utilizando Programação Orientada a Objetos (OOP). O sistema permite autenticação de usuários (registro e login) e gerenciamento de contas bancárias com funcionalidades de depósito, saque, consulta de saldo e operações CRUD.
+Projeto de uma aplicação bancária desenvolvida em PHP com Programação Orientada a Objetos (OOP) e arquitetura baseada no padrão MVC (Model-View-Controller). O sistema permite o gerenciamento de contas bancárias, autenticação de usuários, consultas de saldo e operações financeiras, com foco em segurança e boas práticas de desenvolvimento.
 
 ### ⚙️ Funcionalidades
 - Consulta de Saldo: Verificação de nome do banco, número da agência, número da conta e titular da conta.
