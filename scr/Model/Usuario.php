@@ -33,35 +33,66 @@ class Usuario
         }
 
         return false; // Senha ou usuário incorretos
+        echo "Usuário ou senha inválidos."; // Mensagem de erro
     }
 
     public function register(string $name, string $email, string $gender, string $birth_date, string $password): string
-{
-    // Verificar se o email já existe
-    $sql = 'SELECT * FROM usuario WHERE email = ?';
-    $prepare = $this->conexao->prepare($sql);
-    $prepare->bindParam(1, $email);
-    $prepare->execute();
-    if ($prepare->fetch()) {
-        return "E-mail já cadastrado.";
+
+    {
+        // Verificar se todos os campos estão preenchidos
+        if (empty($name) || empty($email) || empty($gender) || empty($birth_date) || empty($password)) {
+            return "Preencha todos os campos obrigatórios.";
+        }
+
+        // Verificar se o email é válido
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return "E-mail inválido.";
+        }
+
+        // Verificar se a senha tem pelo menos 6 caracteres
+        if (strlen($password) < 6) {
+            return "A senha deve ter pelo menos 6 caracteres.";
+        }
+
+        // Verificar se a data de nascimento é válida
+        $date = DateTime::createFromFormat('Y-m-d', $birth_date);
+        if (!$date || $date->format('Y-m-d') !== $birth_date) {
+            return "Data de nascimento inválida.";
+        }
+
+        // Verificar se o gênero é válido
+        $validGenders = ['Masculino', 'Feminino', 'Outro'];
+        if (!in_array($gender, $validGenders)) {
+            return "Gênero inválido.";
+        }
+
+        // Verificar se o nome tem pelo menos 3 caracteres
+        if (strlen($name) < 3) {
+            return "O nome deve ter pelo menos 3 caracteres.";
+        }
+
+        // Verificar se o email já existe
+        $sql = 'SELECT * FROM usuario WHERE email = ?';
+        $prepare = $this->conexao->prepare($sql);
+        $prepare->bindParam(1, $email);
+        $prepare->execute();
+        if ($prepare->fetch()) {
+            return "E-mail já cadastrado.";
+        }
+
+        // Hash da senha para segurança
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $sql = 'INSERT INTO usuario (name, email, gender, birth_date, password) VALUES (?, ?, ?, ?, ?)';
+
+        $prepare = $this->conexao->prepare($sql);
+        $prepare->bindParam(1, $name);
+        $prepare->bindParam(2, $email);
+        $prepare->bindParam(3, $gender);
+        $prepare->bindParam(4, $birth_date);
+        $prepare->bindParam(5, $hashedPassword);
+
+        $prepare->execute();
+
+        return "Usuário registrado com sucesso!";
     }
-
-    // Hash da senha para segurança
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-    $sql = 'INSERT INTO usuario (name, email, gender, birth_date, password) 
-            VALUES (?, ?, ?, ?, ?)';
-
-    $prepare = $this->conexao->prepare($sql);
-    $prepare->bindParam(1, $name);
-    $prepare->bindParam(2, $email);
-    $prepare->bindParam(3, $gender);
-    $prepare->bindParam(4, $birth_date);
-    $prepare->bindParam(5, $hashedPassword);
-
-    $prepare->execute();
-
-    return "Usuário registrado com sucesso!";
-}
-
 }
