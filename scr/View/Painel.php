@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['username'])) {
     header('Location: Login.html');
     exit;
 }
@@ -14,7 +14,7 @@ if (!isset($_SESSION['user'])) {
     <title>Painel do Usuário</title>
 </head>
 <body>
-    <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['user']); ?>!</h1>
+    <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
     <a href="../View/Logout.php">Sair</a>
 </body>
 </html>

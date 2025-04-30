@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($usuario->login($email, $password)) {
-        $_SESSION['user'] = $email;
+        $_SESSION['username'] = $email;
         header('Location: ../View/Painel.php');
         exit;
     } else {
