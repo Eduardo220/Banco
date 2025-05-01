@@ -38,7 +38,6 @@ class Usuario
             $stmt = $this->conexao->prepare($sql);
             $stmt->execute([$name, $email, $gender, $birth_date, $hash]);
             return "Usuário cadastrado com sucesso!" . "<br><a href='../View/Login.html'>Clique aqui para fazer login</a>";
-            
         } catch (PDOException $e) {
             if ($e->getCode() === '23000') {
                 return "E-mail já está cadastrado.";

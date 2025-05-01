@@ -1,6 +1,12 @@
-<?php 
-declare(strict_types=1); // Habilitando o modo estrito para garantir que os tipos sejam respeitados
-namespace Parkew\Banco\Contratos; // Definindo o namespace Banco\Contratos
+<?php
+
+declare(strict_types=1);
+
+// Habilitando o modo estrito para garantir que os tipos sejam respeitados
+
+namespace Parkew\Banco\Contratos;
+
+// Definindo o namespace Banco\Contratos
 
 interface OperacoesContaBancariaInterface // Interface para definir as operações de uma conta bancária
 {
@@ -8,4 +14,3 @@ interface OperacoesContaBancariaInterface // Interface para definir as operaçõ
     public function sacar(float $valor): string; // Método para sacar um valor da conta
     public function obterSaldo(): string; // Método para obter o saldo atual da conta
 }
-?>

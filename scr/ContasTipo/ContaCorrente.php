@@ -1,9 +1,16 @@
-<?php 
-declare(strict_types=1); // Habilitando o modo estrito para garantir que os tipos sejam respeitados
+<?php
 
-namespace Parkew\Banco\ContasTipo; // Definindo o namespace Banco\ContasTipo
+declare(strict_types=1);
 
-use Parkew\Banco\ContaBancaria; // Importando a classe ContaBancaria do namespace Banco
+// Habilitando o modo estrito para garantir que os tipos sejam respeitados
+
+namespace Parkew\Banco\ContasTipo;
+
+// Definindo o namespace Banco\ContasTipo
+
+use Parkew\Banco\ContaBancaria;
+
+// Importando a classe ContaBancaria do namespace Banco
 
 class ContaCorrente extends ContaBancaria
 {
@@ -23,8 +30,6 @@ class ContaCorrente extends ContaBancaria
 
     public function obterSaldo(): string
     {
-        // Método para obter o saldo atual da conta corrente
-        return "Saldo atual da conta corrente: R$ " . number_format($this->saldo - self::TAXA_SAQUE, 2, ',' , '.');
+        return "Saldo atual da conta corrente: R$ " . number_format($this->saldo - self::TAXA_SAQUE, 2, ',', '.'); // Método para obter o saldo atual da conta corrente
     }
-}   
-?>
+}

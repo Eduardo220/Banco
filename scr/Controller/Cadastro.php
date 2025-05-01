@@ -1,8 +1,7 @@
 <?php
+
 require_once __DIR__ . '/../Model/Usuario.php';
-
 $usuario = new Usuario();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
@@ -10,8 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $birth_date = trim($_POST['birth_date'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
-
-    // Verificações básicas
+// Verificações básicas
     if (empty($name) || empty($email) || empty($gender) || empty($birth_date) || empty($password) || empty($confirm_password)) {
         echo "Todos os campos são obrigatórios.";
         exit;
@@ -40,13 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $birth_date = $dateObj->format('Y-m-d');
-
     echo $usuario->register($name, $email, $gender, $birth_date, $password);
-}
-else {
-    // Se não for uma requisição POST, redireciona para a página de cadastro
+} else {
+// Se não for uma requisição POST, redireciona para a página de cadastro
     header('Location: ../View/Cadastro.html');
     exit;
 }
-
-?>

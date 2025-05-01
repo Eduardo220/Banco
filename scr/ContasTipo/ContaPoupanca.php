@@ -1,9 +1,16 @@
-<?php 
-declare(strict_types=1); // Habilitando o modo estrito para garantir que os tipos sejam respeitados
+<?php
 
-namespace Parkew\Banco\ContasTipo; // Definindo o namespace Banco\ContasTipo
+declare(strict_types=1);
 
-use Parkew\Banco\ContaBancaria; // Importando a classe ContaBancaria do namespace Banco
+// Habilitando o modo estrito para garantir que os tipos sejam respeitados
+
+namespace Parkew\Banco\ContasTipo;
+
+// Definindo o namespace Banco\ContasTipo
+
+use Parkew\Banco\ContaBancaria;
+
+// Importando a classe ContaBancaria do namespace Banco
 
 class ContaPoupanca extends ContaBancaria
 {
@@ -11,7 +18,7 @@ class ContaPoupanca extends ContaBancaria
     const TIPO_CONTA = 'Conta Poupança'; // Definindo uma constante para o tipo de conta
 
     public function __construct(
-        string $banco, 
+        string $banco,
         string $agencia,
         string $conta,
         string $titular,
@@ -22,9 +29,6 @@ class ContaPoupanca extends ContaBancaria
 
     public function obterSaldo(): string
     {
-        // Método para obter o saldo atual da conta poupança
-        return "Saldo atual da conta poupança: R$ " . number_format(($this->saldo + ($this->saldo * self::RENDIMENTO)), 2, ',' , '.');
+        return "Saldo atual da conta poupança: R$ " . number_format(($this->saldo + ($this->saldo * self::RENDIMENTO)), 2, ',', '.');// Método para obter o saldo atual da conta poupança
     }
 }
-
-?>

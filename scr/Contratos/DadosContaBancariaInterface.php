@@ -1,6 +1,12 @@
-<?php 
-declare(strict_types=1); // Habilitando o modo estrito para garantir que os tipos sejam respeitados
-namespace Parkew\Banco\Contratos; // Definindo o namespace Banco\Contratos
+<?php
+
+declare(strict_types=1);
+
+// Habilitando o modo estrito para garantir que os tipos sejam respeitados
+
+namespace Parkew\Banco\Contratos;
+
+// Definindo o namespace Banco\Contratos
 
 interface DadosContaBancariaInterface
 {
@@ -9,4 +15,3 @@ interface DadosContaBancariaInterface
     public function getConta(): string; // Método para obter o número da conta
     public function getTitular(): string; // Método para obter o nome do titular
 }
-?>

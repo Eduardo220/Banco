@@ -1,14 +1,11 @@
 <?php
+
 require_once __DIR__ . '/../Model/Usuario.php';
-
 session_start();
-
 $usuario = new Usuario();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
-
     if (empty($email) || empty($password)) {
         echo "Preencha todos os campos.";
         exit;
@@ -27,5 +24,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Usuário ou senha inválidos.";
     }
 }
-
-?>
